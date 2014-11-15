@@ -40,6 +40,7 @@ class window.Game extends Backbone.Model
 
   newDeal: ->
     # @set 'deck', deck = new Deck()
+    if @get('deck').getNumCards() < 5 then @set 'deck', new Deck()
     @set 'playerHand', @get('deck').dealPlayer()
     @set 'dealerHand', @get('deck').dealDealer()
     @get('playerHand').on 'add', => @checkPlayerScore()
