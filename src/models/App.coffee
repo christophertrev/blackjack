@@ -5,3 +5,9 @@ class window.App extends Backbone.Model
     @set 'game', game = new Game()
     @set 'playerHand', game.get('playerHand')
     @set 'dealerHand', game.get('dealerHand')
+
+  reset: ->
+    @set 'playerHand', @get('game').get('playerHand')
+    @set 'dealerHand', @get('game').get('dealerHand')
+
+

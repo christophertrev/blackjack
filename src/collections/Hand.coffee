@@ -21,9 +21,11 @@ class window.Hand extends Backbone.Collection
     [@minScore(), @minScore() + 10 * @hasAce()]
 
   win: ->
+    debugger
     @trigger 'win', @
 
   lose: ->
+    debugger
     @trigger 'lose', @
 
   stand: ->

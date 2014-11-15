@@ -8,17 +8,28 @@ class window.AppView extends Backbone.View
   events:
     'click .hit-button': -> @model.get('playerHand').hit()
     'click .stand-button': -> @model.get('playerHand').stand()
+    'click .dealagain': -> @model.get('game').newDeal()
 
   initialize: ->
     @render()
-    @model.get('game').on 'lose', =>
-      @renderLose()
+    @model.get('game').on 'gameOver', =>
+      @renderGameOver()
 
   render: ->
+    # debugger
     @$el.children().detach()
     @$el.html @template()
     @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
 
-  renderLose: ->
-    @$el.append $('<div>').text 'Lose!'
+  renderGameOver: ->
+    button = $('<button>').text('Deal Again?').addClass('dealagain')
+    button.on 'click', @redealRender.bind @
+    $('body').prepend $('<div>').addClass('restart').text('GAMEOVER').append button
+
+  redealRender: ->
+    # debugger
+    @model.get('game').newDeal()
+    @model.reset()
+    @render()
+    $('.restart').remove()

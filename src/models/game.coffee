@@ -21,14 +21,21 @@ class window.Game extends Backbone.Model
 
   loseGame: ->
     @get('playerHand').lose()
+    @trigger 'gameOver', @
 
   winGame: ->
     @get('playerHand').win()
+    @trigger 'gameOver', @
 
   continuePlay: ->
-    debugger
     @get('dealerHand').reveal()
     @get('dealerHand').hit() while @get('dealerHand').scores()[0] < 17
     playerScore = @get('playerHand').scores()[0]
     if playerScore > @get('dealerHand').scores()[0] or @get('dealerHand').scores()[0] > 21 then @winGame() else @loseGame()
 
+  newDeal: ->
+    # @set 'deck', deck = new Deck()
+    @set 'playerHand', @get('deck').dealPlayer()
+    @set 'dealerHand', @get('deck').dealDealer()
+    @get('playerHand').on 'add', => @checkPlayerScore()
+    @get('playerHand').on 'stand', => @continuePlay()
