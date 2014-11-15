@@ -1,9 +1,9 @@
 .card {
   float: left;
   border: solid 1px black;
-  width: 100px;
+  width: 150px;
   border-radius: 5px;
-  height: 140px;
+  height: 210px;
   margin-right: 20px;
 }
 
@@ -13,6 +13,8 @@
 
 .hand {
   overflow: auto;
+  left: 40%;
+  position: relative;
 }
 
 
@@ -20,18 +22,45 @@
   position: absolute;
   color: black;
   font-size: 60px;
-  left: 50%;
-  top: 20%;
+  left: 40%;
+  /*top: 20%;*/
+  padding-top: 30px;
   width: 400px;
   height: 200px;
-  background-color: red;
+  /*background-color: red;*/
+  text-align: center;
 }
 
-
+body {
+  background-image: url(../img/tablebackground.jpg);
+}
 
 .dealagain {
   width: 400px;
   height: 100px;
-  font-size: 20px;
+  font-size: 40px;
 
 }
+
+.hit-button {
+  position: relative;
+  left: 47%;
+  /*padding-bottom: 10px;*/
+}
+
+.stand-button {
+  position: relative;
+  left: 40%;
+}
+
+.scores {
+  position: relative;
+  left: 40%;
+  font-size:40px;
+}
+
+select {
+  position: relative;
+  left: 46%;
+}
+
