@@ -25,3 +25,10 @@ class window.Hand extends Backbone.Collection
 
   lose: ->
     @trigger 'lose', @
+
+  stand: ->
+    @trigger 'stand', @
+
+  reveal: ->
+    @map (card) ->
+        card.set 'revealed', true

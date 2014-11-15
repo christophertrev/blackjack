@@ -6,20 +6,32 @@ class window.HandView extends Backbone.View
   initialize: ->
     @collection.on 'add remove change', => @render()
     @render()
-    @collection.on 'lose', => @renderLoss()
+    @collection.on 'lose', =>
+      @haslost = true
+      @render()
+    , @
+    @collection.on 'win', =>
+      @hasWon = true
+      @render()
+    , @
 
   render: ->
-    if haslost is off then
-      @$el.children().detach()
-      @$el.html @template @collection
-      @$el.append @collection.map (card) ->
-        new CardView(model: card).$el
-      @$('.score').text @collection.scores()[0]
+    @$el.children().detach()
+    @$el.html @template @collection
+    @$el.append @collection.map (card) ->
+      new CardView(model: card).$el
+    @$('.score').text @collection.scores()[0]
+    if @haslost then @renderLoss()
+    if @hasWon then @renderWin()
 
   renderLoss: ->
-    debugger
     name = @$('h2').text()
     @$('h2').text(name + ' Lose!')
-    @haslost = true
+
+  renderWin: ->
+    name = @$('h2').text()
+    @$('h2').text(name + ' Win!')
 
   haslost: false
+
+  hasWon: false
